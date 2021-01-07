@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Image } from 'react-native';
+import { Image, NativeModules, StatusBar } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { Ionicons, FontAwesome } from '@expo/vector-icons';
 import AppLoading from 'expo-app-loading';
@@ -20,6 +20,7 @@ const cacheImages = (images) =>
 const cacheFonts = (fonts) => fonts.map((font) => Font.loadAsync(font));
 
 export default function App() {
+  console.log(NativeModules.UIManager);
   const [isReady, setIsReady] = useState(false);
   const loadAssets = () => {
     const images = cacheImages([
@@ -31,9 +32,12 @@ export default function App() {
   };
   const onFinish = () => setIsReady(true);
   return isReady ? (
-    <NavigationContainer>
-      <Stack />
-    </NavigationContainer>
+    <>
+      <NavigationContainer>
+        <Stack />
+      </NavigationContainer>
+      <StatusBar />
+    </>
   ) : (
     <AppLoading startAsync={loadAssets} onFinish={onFinish} onError={console.error} />
   );

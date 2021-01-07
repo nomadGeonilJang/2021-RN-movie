@@ -8,7 +8,13 @@ const StackNavigation = createStackNavigator();
 
 export default function Stack() {
   return (
-    <StackNavigation.Navigator>
+    <StackNavigation.Navigator
+      mode="card"
+      screenOptions={{
+        gestureEnabled: true,
+        headerBackTitleVisible: false,
+      }}
+    >
       <StackNavigation.Screen name="Movies" component={Tab} />
       <StackNavigation.Screen name="Detail" component={Detail} />
     </StackNavigation.Navigator>

@@ -8,6 +8,7 @@ module.exports = {
   ],
   parser: 'babel-eslint',
   rules: {
+    'no-shadow': 0,
     'no-use-before-define': 0,
     'no-unused-vars': 1,
     'react/prop-types': 0,
