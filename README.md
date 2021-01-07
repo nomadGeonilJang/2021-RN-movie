@@ -1,6 +1,3 @@
-# RN Project
+# Noovies
 
-## install
-```bash
-expo init project's name
-```
+Beautiful Tri-platform (iOS, Android, Web) Application built with React Native & React Native Web.

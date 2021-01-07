@@ -1,0 +1,10 @@
+{
+  "devToolsPort": 19002,
+  "expoServerPort": 19000,
+  "packagerPort": null,
+  "packagerPid": null,
+  "webpackServerPort": 19006,
+  "expoServerNgrokUrl": "https://nj-mnt.geonil.ranking-movie.exp.direct",
+  "packagerNgrokUrl": "https://packager.nj-mnt.geonil.ranking-movie.exp.direct",
+  "ngrokPid": 28605
+}

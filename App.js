@@ -1,31 +1,31 @@
-import React, { useState } from 'react';
-import { Image, NativeModules, StatusBar } from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
-import { Ionicons, FontAwesome } from '@expo/vector-icons';
-import AppLoading from 'expo-app-loading';
-import * as Font from 'expo-font';
-import { Asset } from 'expo-asset';
-import Stack from './navigations/Stack';
+import React, { useState } from "react";
+import { AppLoading } from "expo";
+import * as Font from "expo-font";
+import { Image, StatusBar } from "react-native";
+import { NavigationContainer } from "@react-navigation/native";
+import { Asset } from "expo-asset";
+import { Ionicons, FontAwesome } from "@expo/vector-icons";
+import Stack from "./navigation/Stack";
 
-// require("@expo/vector-icons/build/vendor/react-native-vector-icons/Fonts/Ionicons.ttf");
+require("@expo/vector-icons/build/vendor/react-native-vector-icons/Fonts/Ionicons.ttf");
 
-const cacheImages = (images) =>
-  images.map((image) => {
-    if (typeof image === 'string') {
+const cacheImages = images =>
+  images.map(image => {
+    if (typeof image === "string") {
       return Image.prefetch(image);
+    } else {
+      return Asset.fromModule(image).downloadAsync();
     }
-    return Asset.fromModule(image).downloadAsync();
   });
 
-const cacheFonts = (fonts) => fonts.map((font) => Font.loadAsync(font));
+const cacheFonts = fonts => fonts.map(font => Font.loadAsync(font));
 
 export default function App() {
-  console.log(NativeModules.UIManager);
   const [isReady, setIsReady] = useState(false);
   const loadAssets = () => {
     const images = cacheImages([
-      'https://images.unsplash.com/photo-1571847140471-1d7766e825ea?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=673&q=80',
-      require('./assets/splash.png'),
+      "https://images.unsplash.com/photo-1571847140471-1d7766e825ea?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=673&q=80",
+      require("./assets/splash.png")
     ]);
     const fonts = cacheFonts([Ionicons.font, FontAwesome.font]);
     return Promise.all([...images, ...fonts]);
@@ -36,9 +36,13 @@ export default function App() {
       <NavigationContainer>
         <Stack />
       </NavigationContainer>
-      <StatusBar />
+      <StatusBar barStyle="light-content" />
     </>
   ) : (
-    <AppLoading startAsync={loadAssets} onFinish={onFinish} onError={console.error} />
+    <AppLoading
+      startAsync={loadAssets}
+      onFinish={onFinish}
+      onError={console.error}
+    />
   );
 }
