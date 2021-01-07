@@ -8,6 +8,8 @@ module.exports = {
   ],
   parser: 'babel-eslint',
   rules: {
+    'no-unused-vars': 1,
+    'react/prop-types': 0,
     'global-require': 0,
     'import/no-unresolved': 'off',
     'react/jsx-filename-extension': [
